@@ -9,11 +9,10 @@ class User(Base):
     __tablename__ = 'users'
     id = Column(Integer, primary_key=True)
     name = Column(String(50), unique=False)
-    sex = Column(String(1), unique=False)
+    sex = Column(String(5), unique=False)
     age = Column(Integer, unique=False)
 
     def __init__(self, name=None, sex=None, age=None):
-        self.id = id
         self.name = name
         self.sex = sex
         self.age = age
@@ -35,7 +34,6 @@ class Result(Base):
     timestamp = Column(DateTime(timezone=False), unique=False, default=datetime.datetime.now)
 
     def __init__(self, user_id=None, reaction_time=None, distance_from_centre=None, number_of_drinks=None):
-        self.id = id
         self.user_id = user_id
         self.reaction_time = reaction_time
         self.distance_from_centre = distance_from_centre
