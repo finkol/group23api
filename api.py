@@ -46,11 +46,7 @@ class ResultApi(Resource):
             print "id: " + str(id)
             return get_result_by_id(id)
 
-        elif 'name' in request.args:
-            print "bla"
-            name = request.args['name']
-            print "name: " + str(name)
-            return get_user_by_name(name)
+        return None
 
     def post(self):
         result = parse_result()

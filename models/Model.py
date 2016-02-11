@@ -28,7 +28,7 @@ class Result(Base):
     __tablename__ = 'results'
     id = Column(Integer, primary_key=True)
     user_id = Column(Integer, ForeignKey(User.id), unique=False)
-    reaction_time = Column(Time(timezone=False), unique=False)
+    reaction_time = Column(Numeric(asdecimal=False), unique=False)
     distance_from_centre = Column(Numeric(asdecimal=False), unique=False)
     number_of_drinks = Column(Integer, unique=False)
     timestamp = Column(DateTime(timezone=False), unique=False, default=datetime.datetime.now)
