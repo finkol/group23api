@@ -1,3 +1,4 @@
+import os
 from flask import Flask, jsonify, g, request
 from flask_restful import Api, Resource
 from database import init_db
