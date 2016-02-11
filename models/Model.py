@@ -1,9 +1,6 @@
 from sqlalchemy import Column, Integer, String, ForeignKey, Boolean, DateTime, Numeric, Time
 from sqlalchemy.orm import relationship, backref
 from database import Base
-from passlib.apps import custom_app_context as pwd_context
-from itsdangerous import (TimedJSONWebSignatureSerializer
-                          as Serializer, BadSignature, SignatureExpired)
 from sqlalchemy.dialects.postgresql import ARRAY
 import datetime
 

@@ -17,7 +17,7 @@ class UserApi(Resource):
     def get(self):
         id = request.args['id']
         print "id: " + str(id)
-        return get_workout_line_bundle(id)
+        return get_user(id)
 
     def post(self):
         user = parse_user()
