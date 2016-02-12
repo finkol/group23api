@@ -97,8 +97,9 @@ def get_image_by_sex(input_sex):
     users = User.query.filter_by(sex=input_sex)
     return structure_plot_data(users)
 
-def get_image_by_age(input_age):
-    users = User.query.filter_by(age=input_age)
+def get_image_by_age(input_age_from, input_age_to):
+    users = User.query.filter(User.age >= input_age_from, User.age <= input_age_to)
+    print users
     return structure_plot_data(users)
 
 

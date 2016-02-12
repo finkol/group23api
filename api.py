@@ -79,9 +79,10 @@ class ImageApi(Resource):
         if 'sex' in request.args:
             sex = request.args['sex']
             return get_image_by_sex(sex)
-        elif 'age' in request.args:
-            age = request.args['age']
-            return get_image_by_age(age)
+        elif 'age_from' and 'age_to' in request.args:
+            age_from = request.args['age_from']
+            age_to = request.args['age_to']
+            return get_image_by_age(age_from, age_to)
         elif 'user_name' in request.args:
             user_name = request.args['user_name']
             return get_image_by_user_name(user_name)
