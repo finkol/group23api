@@ -5,7 +5,8 @@ from database import init_db
 
 from services.parsers.Parser import parse_user, parse_result
 from services.Service import register_user, get_user_by_id, get_user_by_name, get_result_by_id, register_result, \
-    get_result_by_user_name, get_result_by_user_id, get_result_by_age, get_result_by_sex
+    get_result_by_user_name, get_result_by_user_id, get_result_by_age, get_result_by_sex, get_image_by_user_name, \
+    get_image_by_age, get_image_by_sex
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'twoPointtwoLeyndo'
@@ -39,7 +40,6 @@ class ResultApi(Resource):
     def get(self):
         if 'id' in request.args:
             id = request.args['id']
-            print "id: " + str(id)
             return get_result_by_id(id)
 
         return None
@@ -70,9 +70,25 @@ class HistoryApi(Resource):
             return get_result_by_user_name(user_name)
         return None
 
-
 api.add_resource(HistoryApi,
                  '/api/history')
+
+
+class ImageApi(Resource):
+    def get(self):
+        if 'sex' in request.args:
+            sex = request.args['sex']
+            return get_image_by_sex(sex)
+        elif 'age' in request.args:
+            age = request.args['age']
+            return get_image_by_age(age)
+        elif 'user_name' in request.args:
+            user_name = request.args['user_name']
+            return get_image_by_user_name(user_name)
+        return None
+
+api.add_resource(ImageApi,
+                 '/api/image')
 
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 2500))
