@@ -33,8 +33,8 @@ def get_user_by_id(input_id):
 
 def get_user_by_name(input_name):
     user = User.query.filter_by(name=input_name).first()
-    number_of_drinks = db_session.query(func.max(Result.number_of_drinks)).filter(Result.user_id == user.id).scalar()
     if user is not None:
+        number_of_drinks = db_session.query(func.max(Result.number_of_drinks)).filter(Result.user_id == user.id).scalar()
         return_user = user.get_object_with_results()
         return_user.update({'number_of_drinks': number_of_drinks})
         return jsonify(user=return_user)
