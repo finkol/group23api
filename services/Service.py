@@ -13,6 +13,7 @@ import numpy as np
 
 from flask import request, jsonify, make_response
 
+wake_up_db = db_session.execute("select 1")
 
 def register_user(user):
     db_session.add(user)
