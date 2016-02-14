@@ -98,11 +98,15 @@ def get_image_by_sex(input_sex):
     users = User.query.filter_by(sex=input_sex)
     return structure_plot_data(users)
 
+
 def get_image_by_age(input_age_from, input_age_to):
     users = User.query.filter(User.age >= input_age_from, User.age <= input_age_to)
-    print users
     return structure_plot_data(users)
 
+
+def get_image_all():
+    users = User.query.all()
+    return structure_plot_data(users)
 
 def structure_plot_data(users):
     plot_data = {}
@@ -118,7 +122,7 @@ def structure_plot_data(users):
 
                 number_of_rows = data['number_of_rows'] + 1.0
                 reaction_time = (data['reaction_time'] + result['reaction_time']) / number_of_rows
-                distance_from_centre = (data['distance_from_centre'] + result['distance_from_centre']) / number_of_rows
+                distance_from_centre = ((data['distance_from_centre'] + result['distance_from_centre']) / number_of_rows) / 100
 
                 plot_data[result['number_of_drinks']] = {'reaction_time': reaction_time,
                                                          'distance_from_centre': distance_from_centre,
