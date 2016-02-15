@@ -11,6 +11,8 @@ from matplotlib.figure import Figure
 import matplotlib.pyplot as plt
 import numpy as np
 
+import seaborn as sns; sns.set(style="ticks", color_codes=True)
+
 from flask import request, jsonify, make_response
 
 wake_up_db = db_session.execute("select 1") #Git comment
@@ -130,7 +132,7 @@ def structure_plot_data(users):
                                                          'number_of_rows': number_of_rows}
 
         ordered_plot_data = collections.OrderedDict(sorted(plot_data.items()))
-        return plot_line_chart(ordered_plot_data, "Number of drinks", "Reaction time", "Distance from centre")
+        return plot_line_chart(ordered_plot_data, "Number of drinks", "Reaction time", "Distance from center")
 
     else:
         return jsonify(result=None)
@@ -139,7 +141,7 @@ def structure_plot_data(users):
 def plotChart(x, y):
     fig = Figure()
     ax = fig.add_subplot(111)
-    ax.plot(x,y)
+    ax.plot(x, y)
     canvas = FigureCanvas(fig)
     png_output = StringIO.StringIO()
     canvas.print_png(png_output)
@@ -163,39 +165,19 @@ def plot_line_chart(data, xlabel, y1label, y2label):
 
     n_groups = len(x)
 
-    means_men = (20, 35, 30, 35, 27)
-    #std_men = (2, 3, 4, 1, 2)
+    pallete = sns.color_palette("muted")
 
-    means_women = (25, 32, 34, 20, 25)
-    #std_women = (3, 5, 2, 3, 3)
-
-    index = np.arange(n_groups)
-    bar_width = 0.35
-
-    opacity = 0.4
-
-    #rects1 = ax.bar(index, y1, bar_width,
-                 #alpha=opacity,
-                 #color='b',
-                 #yerr=std_men,
-                 #error_kw=error_config,
-                 #label=y1label)
-
-    #rects2 = ax.bar(index + bar_width, y2, bar_width,
-                     #alpha=opacity,
-                     #color='r',
-                     #yerr=std_women,
-                     #error_kw=error_config,
-                     #label=y2label)
-
-    ax.plot(x, y1, color='g', label=y1label)
-    ax.plot(x, y2, color='r', label=y2label)
+    ax.plot(x, y1, color=pallete[1], label=y1label)
+    ax.plot(x, y2, color=pallete[0], label=y2label)
 
     plt.xlabel('Number of drinks')
     plt.ylabel('Scores')
     #plt.title('Scores by group and gender')
     #plt.xticks(index + bar_width, x)
     #ax.set_label_coords(index+bar_width,index)
+
+    #l = ax.fill_between(x, y1)
+
     plt.legend()
     canvas = FigureCanvas(fig)
     png_output = StringIO.StringIO()
