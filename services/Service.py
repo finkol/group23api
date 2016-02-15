@@ -108,6 +108,7 @@ def get_image_all():
     users = User.query.all()
     return structure_plot_data(users)
 
+
 def structure_plot_data(users):
     plot_data = {}
     for i in range(0, 21):
@@ -148,12 +149,15 @@ def plotChart(x, y):
 
 
 def plot_line_chart(data, xlabel, y1label, y2label):
-    x = data.keys()
+    x = []
     y1 = []
     y2 = []
     for key, value in data.iteritems():
-        y1.append(value['reaction_time'])
-        y2.append(value['distance_from_centre'])
+        print value
+        if value['number_of_rows'] != 0.0:
+            x.append(key)
+            y1.append(value['reaction_time'])
+            y2.append(value['distance_from_centre'])
 
     fig, ax = plt.subplots()
 
